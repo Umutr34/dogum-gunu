@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>💙</title>
+  <style>
+    body{
+      margin:0; min-height:100vh; display:flex; align-items:center; justify-content:center;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial;
+      background: linear-gradient(135deg, #e6f4ff, #fff2f2);
+    }
+    .card{
+      width:min(520px, 92vw);
+      background: rgba(255,255,255,.8);
+      border: 1px solid rgba(0,0,0,.08);
+      border-radius: 18px;
+      padding: 22px;
+      box-shadow: 0 12px 40px rgba(0,0,0,.10);
+      text-align:center;
+      backdrop-filter: blur(8px);
+    }
+    h1{margin:0 0 10px; font-size: 22px;}
+    p{margin:10px 0; font-size:18px; line-height:1.4}
+    button{
+      border:0; border-radius: 14px; padding: 12px 16px;
+      font-size:16px; cursor:pointer;
+      background:#111; color:#fff;
+    }
+    button:hover{transform: translateY(-1px)}
+    .msg{display:none; margin-top:16px}
+    .heart{font-size:54px; margin-top:8px; animation: pop .7s ease-in-out infinite alternate;}
+    @keyframes pop{ from{transform:scale(1)} to{transform:scale(1.08)} }
+    .small{opacity:.7; font-size:13px; margin-top:10px}
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>Bir sürpriz var 🎁</h1>
+    <p>Butona tıklayın ❤️</p>
+
+    <button id="btn">Aç</button>
+
+    <div class="msg" id="msg">
+      <p><b>Doğum günün kutlu olsun karıcım, seni çok seviyorum.</b></p>
+      <div class="heart">❤️</div>
+      <div class="small">— Umut</div>
+    </div>
+  </div>
+
+  <script>
+    const btn = document.getElementById("btn");
+    const msg = document.getElementById("msg");
+    btn.addEventListener("click", () => {
+      msg.style.display = "block";
+      btn.style.display = "none";
+    });
+  </script>
+</body>
+</html>
