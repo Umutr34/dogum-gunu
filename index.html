@@ -4,37 +4,101 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>💙</title>
+
   <style>
     body{
-      margin:0; min-height:100vh; display:flex; align-items:center; justify-content:center;
+      margin:0;
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
       font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial;
       background: linear-gradient(135deg, #e6f4ff, #fff2f2);
+      overflow: hidden;
     }
+
+    /* Yağmur katmanı */
+    #hearts {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    /* UMUT❤️ASLI yazıları */
+    .love-fall {
+      position: absolute;
+      top: -40px;
+      font-weight: bold;
+      color: #e63946;
+      opacity: 0.85;
+      white-space: nowrap;
+      text-shadow: 0 4px 8px rgba(0,0,0,.15);
+      animation: fallLove linear forwards;
+      transform-origin: center;
+    }
+
+    @keyframes fallLove {
+      to {
+        transform: translateY(110vh) rotate(var(--rot)) translateX(var(--drift));
+        opacity: 0;
+      }
+    }
+
     .card{
       width:min(520px, 92vw);
-      background: rgba(255,255,255,.8);
+      background: rgba(255,255,255,.82);
       border: 1px solid rgba(0,0,0,.08);
       border-radius: 18px;
       padding: 22px;
       box-shadow: 0 12px 40px rgba(0,0,0,.10);
       text-align:center;
       backdrop-filter: blur(8px);
+      position: relative;
+      z-index: 1;
     }
+
     h1{margin:0 0 10px; font-size: 22px;}
     p{margin:10px 0; font-size:18px; line-height:1.4}
+
     button{
-      border:0; border-radius: 14px; padding: 12px 16px;
-      font-size:16px; cursor:pointer;
-      background:#111; color:#fff;
+      border:0;
+      border-radius: 14px;
+      padding: 12px 16px;
+      font-size:16px;
+      cursor:pointer;
+      background:#111;
+      color:#fff;
     }
-    button:hover{transform: translateY(-1px)}
+
     .msg{display:none; margin-top:16px}
-    .heart{font-size:54px; margin-top:8px; animation: pop .7s ease-in-out infinite alternate;}
-    @keyframes pop{ from{transform:scale(1)} to{transform:scale(1.08)} }
-    .small{opacity:.7; font-size:13px; margin-top:10px}
+
+    .heart{
+      font-size:54px;
+      margin-top:8px;
+      animation: pop .7s ease-in-out infinite alternate;
+    }
+
+    @keyframes pop {
+      from { transform: scale(1); }
+      to   { transform: scale(1.08); }
+    }
+
+    .small{
+      opacity:.7;
+      font-size:13px;
+      margin-top:10px
+    }
   </style>
 </head>
+
 <body>
+
+  <!-- Yağmur alanı -->
+  <div id="hearts"></div>
+
+  <!-- Kart -->
   <div class="card">
     <h1>Bir sürpriz var 🎁</h1>
     <p>Butona tıklayın ❤️</p>
@@ -51,10 +115,39 @@
   <script>
     const btn = document.getElementById("btn");
     const msg = document.getElementById("msg");
+    const hearts = document.getElementById("hearts");
+
+    let loveInterval = null;
+
+    function createLove() {
+      const el = document.createElement("div");
+      el.className = "love-fall";
+      el.textContent = "UMUT❤️ASLI";
+
+      el.style.left = Math.random() * 100 + "vw";
+      el.style.fontSize = (14 + Math.random() * 18) + "px";
+
+      const rotation = (Math.random() * 40 - 20) + "deg"; // eğiklik
+      const drift = (Math.random() * 80 - 40) + "px";    // sağ-sol kayma
+      el.style.setProperty("--rot", rotation);
+      el.style.setProperty("--drift", drift);
+
+      el.style.animationDuration = (5 + Math.random() * 5) + "s";
+
+      hearts.appendChild(el);
+
+      setTimeout(() => el.remove(), 11000);
+    }
+
     btn.addEventListener("click", () => {
       msg.style.display = "block";
       btn.style.display = "none";
+
+      if (!loveInterval) {
+        loveInterval = setInterval(createLove, 300);
+      }
     });
   </script>
+
 </body>
 </html>
